@@ -1,0 +1,1 @@
+Pluginmodules moeten `init(client)` exporteren en kunnen optioneel `destroy(client)` exporteren. Daarna kun je ze live herladen met `/reload type:plugin module:<bestandsnaam-zonder-js>`. Gebruik voor events dezelfde init/destroy-conventie in `events/`.

@@ -1,0 +1,1 @@
+Eventmodules moeten `init(client)` en bij voorkeur `destroy(client)` exporteren. Herladen kan met `/reload type:event module:core`. `destroy` wordt aangeroepen voordat de module opnieuw wordt ingeladen.

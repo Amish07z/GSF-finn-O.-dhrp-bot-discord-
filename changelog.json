@@ -1,0 +1,41 @@
+[
+  {
+    "id": "2026-11-12-dm-blacklist-unban",
+    "version": "2.1.0",
+    "date": "2026-11-12",
+    "title": "Meer meldingen in je DM",
+    "summary": "Je wordt nu ook ingelicht als je blacklist wordt opgeheven of verloopt, en bij een unban.",
+    "added": [
+      "**Blacklist opgeheven:** je krijgt een DM als je van de blacklist wordt gehaald of als je tijdelijke blacklist afloopt",
+      "**Backup-server:** is er een backup-server ingesteld, dan staat de uitnodiging in de welkomstmelding en in de DM bij een ban of kick, zodat je ook daarna bereikbaar blijft"
+    ],
+    "improved": [
+      "**Unban:** de DM met de link om terug te komen wordt nu rechtstreeks door `/unban` verstuurd en komt niet meer te laat of dubbel aan"
+    ]
+  },
+  {
+    "id": "2026-11-12-grote-update",
+    "version": "2.0.0",
+    "date": "2026-11-12",
+    "title": "Grote update voor de GSF-bot",
+    "summary": "De GSF-bot heeft er veel nieuwe functies bij gekregen.",
+    "added": [
+      "**Anti-nuke:** de server wordt beschermd tegen sloop, met automatisch herstel en een DM aan wie geraakt is",
+      "**Regels accepteren:** nieuwe leden krijgen pas toegang nadat ze op de knop hebben gedrukt",
+      "**/memberinfo:** gang-profiel met rang, status, aangenomen-datum en waarschuwingen",
+      "**Kiezen uit een lijst:** bij `/unban`, `/unmute`, `/untimeout`, `/removewarn` en `/unblacklist`",
+      "**Tijdelijke blacklist:** met een duur, de lijst en de rol worden vanzelf bijgewerkt",
+      "**!/? commando's:** `ban`, `unban`, `kick`, `timeout`, `untimeout`, `purge` en `slowmode`",
+      "**Melding in je DM** bij een unban, timeout, opgeheven timeout en handmatige ban of kick",
+      "**Message-logs:** verwijderde en bewerkte berichten, voice, rollen en bans",
+      "**Zichtbaarheid-optie:** kies bij info-commando's of iedereen het ziet of alleen jij",
+      "**Live panelen:** ledenlijst en sollicitatie-status werken zichzelf bij"
+    ],
+    "improved": [
+      "Moderatie-commando's, de ledenlijst en de blacklist reageren sneller"
+    ],
+    "notes": [
+      "Zet `channels.changelog` in config.js voordat je deze update in het kanaal wilt laten plaatsen."
+    ]
+  }
+]
