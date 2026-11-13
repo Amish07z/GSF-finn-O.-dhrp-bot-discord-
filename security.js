@@ -193,10 +193,10 @@ async function notifyVictims(client, guild, victims) {
   return res;
 }
 
-// Stuurt een DM naar iedereen in config.antinukeAdminIds (dat ben jij), bij elke anti-nuke-actie.
+// Stuurt een DM naar iedereen in config.antinukeDmIds (valt terug op antinukeAdminIds als die lijst ontbreekt), bij elke anti-nuke-actie.
 // withOwner = ook de server-eigenaar (alleen voor de grote overtreding-melding, zoals het al was).
 async function dmAdmins(client, guild, payload, withOwner = false) {
-  const ids = new Set(config.antinukeAdminIds || []);
+  const ids = new Set(config.antinukeDmIds || config.antinukeAdminIds || []);
   if (withOwner && guild?.ownerId) ids.add(guild.ownerId);
   await Promise.all([...ids].map((id) => client.users.fetch(id).then((u) => u.send(payload)).catch(() => {})));
 }
@@ -348,7 +348,7 @@ async function alert(client, guild, info) {
   const opts = { ...info, user };
   const target = config.channels.antinuke ? 'antinuke' : 'logs';
   const msg = await sendToChannel(client, target, { embeds: [buildAlert(opts)] });
-  await dmAdmins(client, guild, { embeds: [buildAlert(opts)] }, true); // eigenaar + antinukeAdminIds
+  await dmAdmins(client, guild, { embeds: [buildAlert(opts)] }, true); // eigenaar + antinukeDmIds
   return { msg, opts };
 }
 

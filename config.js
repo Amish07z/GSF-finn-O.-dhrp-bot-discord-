@@ -4,8 +4,15 @@ module.exports = {
   token: process.env.TOKEN,
   clientId: process.env.CLIENT_ID,
   guildId: process.env.GUILD_ID,
-  // Beheren de anti-nuke en krijgen ALLE anti-nuke-meldingen in hun DM
+  // Anti-nuke-admins: mogen /antinuke beheren en hebben overal toegang (ook zonder rol).
   antinukeAdminIds: [
+    '1368042261064974457', // voorhoede7 (admin, krijgt GEEN DM's)
+    '1076617457327939656', // finn_oester
+    '1503420542982684764', // oestertrollie
+    '1219657945223266366', // aapje_nl_
+  ],
+  // Wie ALLE anti-nuke-meldingen in de DM krijgt (los van de admin-lijst hierboven)
+  antinukeDmIds: [
     '1076617457327939656', // finn_oester
     '1503420542982684764', // oestertrollie
     '1219657945223266366', // aapje_nl_
