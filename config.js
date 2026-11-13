@@ -4,7 +4,12 @@ module.exports = {
   token: process.env.TOKEN,
   clientId: process.env.CLIENT_ID,
   guildId: process.env.GUILD_ID,
-  antinukeAdminIds: ['1368042261064974457'], // voorhoede7: beheert de anti-nuke en krijgt alle anti-nuke-meldingen in zijn DM
+  // Beheren de anti-nuke en krijgen ALLE anti-nuke-meldingen in hun DM
+  antinukeAdminIds: [
+    '1076617457327939656', // finn_oester
+    '1503420542982684764', // oestertrollie
+    '1219657945223266366', // aapje_nl_
+  ],
   antinukeWhitelistRoleIds: ['1563527895966810122'], // deze rol is altijd vrijgesteld van anti-nuke
   serverName: 'GSF Den Haag Roleplay',
   // Backup-/bezwaarserver (optioneel). De bot moet in die server zitten. Discord laat bots alleen DM'en naar mensen met wie ze minstens één
@@ -40,7 +45,7 @@ module.exports = {
 
   // Inwoner-rol: wordt gegeven zodra iemand in het regels-kanaal op de knop drukt (NIET meer automatisch bij het joinen).
   // Leeg laten = de bot zoekt een rol met de naam "Inwoner".
-  inwonerRoleId: '',  // TODO: ID van de Inwoner-rol (leeg = de bot zoekt een rol met de naam "Inwoner")
+  inwonerRoleId: '1570595079347896360',
 
   // Actief-rol: gaat weg bij /afwezig en komt terug bij /aanwezig
   actiefRoleId: '',  // TODO: ID van de Actief-rol (leeg = niet gebruiken)
