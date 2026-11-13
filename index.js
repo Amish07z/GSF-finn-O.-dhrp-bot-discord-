@@ -1,6 +1,7 @@
 const { Client, GatewayIntentBits, Partials, Events, ActivityType } = require('discord.js');
 const config = require('./config');
 const { load, register } = require('./loader');
+require('./freshstart').run(); // eenmalig oude cache/changelog-onthoud-bestanden wissen (config.freshStart)
 
 if (!config.token || !config.clientId || !config.guildId) {
   console.error('❌ Vul TOKEN, CLIENT_ID en GUILD_ID in je .env bestand in (kopieer .env.example naar .env).');

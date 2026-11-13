@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const config = require('../config');
 const db = require('../db');
-const { E, embed, logAction, dm, outranks, canManageRole, addZicht, addZichtPrive, vis, getTimedOut, fmtLeft, idFromInput } = require('../utils');
+const { sendToChannel, E, embed, logAction, dm, outranks, canManageRole, addZicht, addZichtPrive, vis, getTimedOut, fmtLeft, idFromInput } = require('../utils');
 const { updateBlacklistPanel } = require('../panels');
 
 const commands = [];
@@ -29,6 +29,7 @@ commands.push({
 
     const e = embed('⚠️ Waarschuwing gegeven', `**Speler:** ${user} (${user.tag})\n**Door:** ${i.user}\n**Reden:** ${reden}\n**Warn:** ${w.nummer}\n**Totaal warns:** ${total}${dmOk ? '' : '\n*(DM kon niet worden verstuurd)*'}`);
     await i.reply({ embeds: [e] });
+    sendToChannel(client, 'warns', { embeds: [e] }); // optioneel warn-kanaal (config.channels.warns)
     logAction(client, i, '⚠️ Waarschuwing', `${user} kreeg **warn ${w.nummer}**.\nReden: ${reden}`);
   },
 });

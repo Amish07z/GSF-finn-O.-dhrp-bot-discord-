@@ -188,7 +188,7 @@ function stepCommand(kind) {
         ? embed('📈 Promotie', `${user} is gepromoveerd!\n\n**${ranks[cur].name}** ➜ ${newRole}${leadText(lc)}\n**Door:** ${i.user}\n**Reden:** ${reden}`, 0x2ecc71)
         : embed('📉 Degradatie', `${user} is gedegradeerd.\n\n**${ranks[cur].name}** ➜ ${newRole}${leadText(lc)}\n**Door:** ${i.user}\n**Reden:** ${reden}`, 0xe67e22);
       await dm(user, e);
-      await announce(i, client, 'promoties', e, `${user}`);
+      await announce(i, client, up || !config.channels.demoties ? 'promoties' : 'demoties', e, `${user}`);
       logAction(client, i, up ? '📈 Promotie' : '📉 Degradatie', `${user} ${up ? 'gepromoveerd' : 'gedegradeerd'} van **${ranks[cur].name}** naar **${ranks[idx].name}**.\nReden: ${reden}`);
       scheduleLedenlijst(client, i.guild);
     },

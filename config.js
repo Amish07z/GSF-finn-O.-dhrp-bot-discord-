@@ -5,7 +5,7 @@ module.exports = {
   clientId: process.env.CLIENT_ID,
   guildId: process.env.GUILD_ID,
   antinukeAdminIds: ['1368042261064974457'], // voorhoede7: beheert de anti-nuke en krijgt alle anti-nuke-meldingen in zijn DM
-  antinukeWhitelistRoleIds: ['1567817981428502528'], // DEV-rol is altijd vrijgesteld van anti-nuke
+  antinukeWhitelistRoleIds: ['1563527895966810122'], // deze rol is altijd vrijgesteld van anti-nuke
   serverName: 'GSF Den Haag Roleplay',
   // Backup-/bezwaarserver (optioneel). De bot moet in die server zitten. Discord laat bots alleen DM'en naar mensen met wie ze minstens één
   // server delen; wie hier lid van blijft, krijgt ook na een ban/kick/unban nog DM's. Plak hier een permanente uitnodigingslink.
@@ -13,6 +13,9 @@ module.exports = {
   footerText: 'GSF • Den Haag Roleplay', // footer onder alle embeds
   color: 0xc0392b, // GSF rood
   logColor: 0x2ecc70, // GSF groen: groene balk van de logs/panelen
+
+  // Verse start: bij het opstarten worden EENMALIG de oude bericht-cache en changelog-onthoud-bestanden gewist (data.json blijft). Nog een keer? Verhoog dit getal.
+  freshStart: '1',
 
   // Changelogs: nieuwe entries uit changelog.json worden bij het opstarten automatisch in channels.changelog geplaatst.
   changelog: {
@@ -31,70 +34,71 @@ module.exports = {
 
   // Regels accepteren: nieuwe leden zien alleen dit kanaal en krijgen pas de Inwoner-rol na het klikken op de knop (verify.js)
   verify: {
-    channelId: '1570057402768822282',  // ✅︱regels-accepteren
-    categoryId: '1567269934747090977', // Landingsbaan
+    channelId: '1570575371370369124',  // ✅︱regels-accepteren
+    categoryId: '',                    // categorie "Landingsbaan" (optioneel: kanaal-ID van de categorie waar het regels-kanaal in hoort)
   },
 
   // Inwoner-rol: wordt gegeven zodra iemand in het regels-kanaal op de knop drukt (NIET meer automatisch bij het joinen).
   // Leeg laten = de bot zoekt een rol met de naam "Inwoner".
-  inwonerRoleId: '1567269932515852291',
+  inwonerRoleId: '',  // TODO: ID van de Inwoner-rol (leeg = de bot zoekt een rol met de naam "Inwoner")
 
   // Actief-rol: gaat weg bij /afwezig en komt terug bij /aanwezig
-  actiefRoleId: '1567269932918378607',
+  actiefRoleId: '',  // TODO: ID van de Actief-rol (leeg = niet gebruiken)
   // Non-actief-rol: komt automatisch bij /afwezig en gaat weg bij /aanwezig
-  nonActiefRoleId: '1567269932918378601',
+  nonActiefRoleId: '',  // TODO: ID van de Non-actief-rol (leeg = niet gebruiken)
 
   // ===== GANG RANGEN (laagste -> hoogste) =====
-  gangRoleId: '1567269932918378602', // GSF (basisrol voor alle leden)
+  gangRoleId: '1567526057186435154', // GSF (basisrol voor alle leden)
 
   // GSF Lead = leiding-rol. Wordt automatisch gegeven vanaf deze rang, en weggehaald bij een lagere rang of ontslag.
-  leadRoleId: '1567269932918378603',
-  leadFromRank: 'Brother',
+  leadRoleId: '1570589012203151390', // GSF Lead (staat in Discord tussen Street Soldier en Underboss)
+  leadFromRank: 'Underboss',
   ranks: [
-    { name: 'Hang Around',    id: '1567274843714486408', emoji: '⏳' },
-    { name: 'Lookout',        id: '1567269932989816873', emoji: '👀' },
-    { name: 'Runner',         id: '1567269932989816874', emoji: '🏃' },
-    { name: 'Street Soldier', id: '1567269932989816875', emoji: '🪖' },
-    { name: 'Street Capo',    id: '1567269932989816876', emoji: '⚔️' },
-    { name: 'Brother',        id: '1567269932989816877', emoji: '🤝' },
-    { name: 'Chief Enforcer', id: '1567269932989816878', emoji: '🛡️' },
-    { name: 'Big Brother',    id: '1567269932989816879', emoji: '👑' },
+    { name: 'Look Around',    id: '1563529024288854017', emoji: '👀' },
+    { name: 'Hang Around',    id: '1563528954218811422', emoji: '⏳' },
+    { name: 'Associate',      id: '1563528906978492567', emoji: '🤝' },
+    { name: 'Prospect',       id: '1563528841417466027', emoji: '🔰' },
+    { name: 'Soldier',        id: '1563528798664925264', emoji: '🪖' },
+    { name: 'Street Soldier', id: '1563528654493982750', emoji: '⚔️' },
+    { name: 'Underboss',      id: '1563528555453743206', emoji: '🛡️' },
+    { name: 'Boss',           id: '1563528374650015875', emoji: '👑' },
   ],
 
   // ===== BEHEERRECHTEN =====
   // Management: promo/demote/ontslagen/aangenomen/blacklist/ban/ticketpanel/etc.
   managementRoleIds: [
-    '1567269932989816879', // Big Brother
-    '1567269932989816878', // Chief Enforcer
+    '1563528374650015875', // Boss
+    '1563528555453743206', // Underboss
   ],
   // Staff: warn/mute/clear/tickets beheren/etc. Begint bij de GSF Lead-rol (leadRoleId, hierboven) en alles daarboven.
-  // Extra rollen die staff mogen zijn kun je hier nog toevoegen.
-  staffRoleIds: [
-    '1567269932989816877', // Brother
-  ],
+  // Extra rollen die staff mogen zijn kun je hier nog toevoegen (leeg = alleen Lead en hoger).
+  staffRoleIds: [],
   // Rol die iemand krijgt bij /blacklist (optioneel, laat leeg = geen rol)
   blacklistRoleId: '',
 
   // ===== KANALEN (kanaal-ID's, leeg = fallback naar het kanaal waar het commando is gebruikt) =====
   channels: {
-    logs: '1568004384602853536',      // alle bot-logs (aangenomen, ontslagen, porto, tickets, ...)
-    messageLogs: '', // 💬 TODO: kanaal-ID voor de message-logs: verwijderde/bewerkte berichten, reacties, voice, leden, bans (zie messageLog hieronder)
-    commands: '1568003929265021000',  // /commands plaatst hier het commands-overzicht (zie opmerking in het antwoord: ID eindigt op 000, check!)
-    porto: '1567269935527366695',     // het "GSF Gang Porto" paneel (wordt aangepast door /portochange)
-    regels: '1569400291911143424',    // /regels plaatst hier de GSF regels
-    ledenlijst: '',                   // de ledenlijst (live bijgewerkt). Leeg = /refresh plaatst hem in het kanaal waar je het typt
-    aangenomen: '1567901313168048198', // ✅︱aangenomen: logs bij /aangenomen en bij aannemen via sollicitatie
-    ontslagen: '1567901328305426542',  // ❌︱ontslagen: logs bij /ontslagen
-    promoties: '',     // /promo en /demote announcements
-    afwezig: '',       // /afwezig en /aanwezig meldingen
-    afwezigOverzicht: '1568028895310127154', // non-actief: live overzicht van wie afwezig is (embed wordt automatisch bijgewerkt)
-    ticketLogs: '1568004866507276389', // ✉️︱ticket-transcript (transcripts van gesloten tickets)
-    blacklist: '1568005409988415518', // #blacklist (hier komt de blacklist-lijst, 1 embed die wordt bijgewerkt)
-    gangregels: '1567269935753990236', // /gangregels plaatst hier de gang-regels (rijden, rippen, ruzies)
-    status: '',        // TODO: kanaal-ID van #status (leeg = /status plaatst het in het kanaal waar je het typt)
-    welkom: '1567269934747090979',     // welkom-embed bij elke nieuwe member
-    changelog: '',     // TODO: kanaal-ID van het changelog-kanaal (leeg = changelogs worden nog niet geplaatst)
+    logs: '1570578272545275904',      // 🤖︱logs: alle bot-logs (aangenomen, ontslagen, porto, tickets, ...)
+    messageLogs: '1570578321589407764', // 🤖︱message-logs: verwijderde/bewerkte berichten, reacties, voice, leden, bans (zie messageLog hieronder)
+    commands: '1570578370482143232',  // 🤖︱commands: /commands plaatst hier het commands-overzicht
+    porto: '1570576911422464110',     // 📻︱porto: het "GSF Gang Porto" paneel (wordt aangepast door /portochange)
+    regels: '1570577005781590097',    // 📚︱regels: /regels plaatst hier de GSF regels
+    ledenlijst: '1570574398367465513', // 📃︱leden-lijst (live bijgewerkt; wordt automatisch geplaatst als hij er nog niet staat)
+    aangenomen: '1570574601799336006', // ✅︱aangenomen: logs bij /aangenomen en bij aannemen via sollicitatie
+    ontslagen: '1570574676638302309',  // ❌︱ontslagen: logs bij /ontslagen
+    promoties: '1570577092997812265',  // 🎖️︱promotie: /promo announcements
+    demoties: '1570577143107166278',   // ⬇️︱demotie: /demote announcements (leeg = ook in het promotie-kanaal)
+    warns: '1570577190532415660',      // ❌︱warn: elke /warn wordt hier ook geplaatst (leeg = niet)
+    afwezig: '1570577508951261254',    // 😴︱afwezig: /afwezig en /aanwezig meldingen
+    afwezigOverzicht: '1570577659552079892', // ❌︱non-actief: live overzicht van wie afwezig is (embed wordt automatisch bijgewerkt)
+    ticketLogs: '1570578225589915840', // ✉️︱ticket-transcript (transcripts van gesloten tickets)
+    blacklist: '1570574730216349796',  // 🚫︱blacklist (hier komt de blacklist-lijst, 1 embed die wordt bijgewerkt)
+    gangregels: '',    // TODO: kanaal-ID voor de gang-regels (leeg = /gangregels plaatst ze in het kanaal waar je het typt)
+    status: '1570574284177547354',     // 📊︱status: sollicitatie-status paneel
+    welkom: '',        // TODO: kanaal-ID voor de welkom-embed bij nieuwe leden (leeg = geen welkombericht)
+    changelog: '1570575571493060688',  // 🤖︱bot-updates: hier komen de changelogs
   },
+
 
   // ===== MESSAGE LOGS (messagelog.js) =====
   messageLog: {
@@ -118,8 +122,8 @@ module.exports = {
 
   // Ticket-categorieën in het dropdown-menu. categoryId = categorie waarin de tickets van dit type komen.
   ticketTypes: [
-    { key: 'sollicitatie', label: 'Sollicitatie', description: 'Solliciteer bij GSF', emoji: '📝', categoryId: '1568009181795983412', form: true },
-    { key: 'partner', label: 'Partner', description: 'Vraag een partnership aan', emoji: '🤝', categoryId: '1568009222833045645' }, // categorie voor partner-tickets
+    { key: 'sollicitatie', label: 'Sollicitatie', description: 'Solliciteer bij GSF', emoji: '📝', categoryId: '1564710163489751162', form: true },
+    { key: 'partner', label: 'Partner', description: 'Vraag een partnership aan', emoji: '🤝', categoryId: '1563527755549904959' }, // categorie voor partner-tickets
   ],
 
   // FiveM server (optioneel, voor /serverstatus). Bijv: 'http://123.45.67.89:30120'

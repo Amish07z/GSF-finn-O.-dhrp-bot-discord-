@@ -11,7 +11,7 @@ const { embed, E, sendToChannel } = require('./utils');
 // ===== Instellingen (overschrijven kan via config.verify in config.js) =====
 const CFG = {
   channelId: config.verify?.channelId || '1570057402768822282',  // ✅︱regels-accepteren
-  categoryId: config.verify?.categoryId || '1567269934747090977', // Landingsbaan
+  categoryId: config.verify?.categoryId || '', // Landingsbaan (optioneel)
   buttonLabel: config.verify?.buttonLabel || 'Ik ga akkoord met de regels',
   ...(config.verify || {}),
 };
