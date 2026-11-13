@@ -107,7 +107,7 @@ module.exports = {
     blacklist: '1570574730216349796',  // 🚫︱blacklist (hier komt de blacklist-lijst, 1 embed die wordt bijgewerkt)
     gangregels: '',    // TODO: kanaal-ID voor de gang-regels (leeg = /gangregels plaatst ze in het kanaal waar je het typt)
     status: '1570574284177547354',     // 📊︱status: sollicitatie-status paneel
-    welkom: '',        // TODO: kanaal-ID voor de welkom-embed bij nieuwe leden (leeg = geen welkombericht)
+    welkom: '1564704093874815117',     // 👋🏼︱welkom: welkom-embed bij elke nieuwe member
     changelog: '1570575571493060688',  // 🤖︱bot-updates: hier komen de changelogs
   },
 
