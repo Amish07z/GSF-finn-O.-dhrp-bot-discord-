@@ -195,7 +195,20 @@ function buildAfwezig() {
 }
 async function updateAfwezigPanel(client, fallback = null) {
   const want = await getChannel(client, config.channels.afwezigOverzicht);
-  return upsertPanel(client, 'afwezig', { want, fallback, adopt: (m) => m.embeds.some((e) => /GSF Afwezigheid/i.test(e.title || '')) }, { embeds: buildAfwezig() });
+  const oldRef = db.data.panels.afwezig;
+  const res = await upsertPanel(client, 'afwezig', { want, fallback, adopt: (m) => m.embeds.some((e) => /GSF Afwezigheid/i.test(e.title || '')) }, { embeds: buildAfwezig() });
+  if (res?.msg) {
+    // Kanaal veranderd? Dan het oude overzicht-bericht opruimen
+    if (oldRef && oldRef.channelId !== res.msg.channelId) {
+      const oc = await getChannel(client, oldRef.channelId);
+      await oc?.messages?.delete(oldRef.messageId).catch(() => {});
+    }
+    // Oude losse meldingen van de bot (🏖️ Afwezigheidsmelding / ✅ Weer aanwezig) uit het kanaal halen
+    const recent = await res.msg.channel.messages.fetch({ limit: 100 }).catch(() => null);
+    const stray = recent?.filter((m) => m.id !== res.msg.id && m.author.id === client.user.id && m.embeds.some((e) => /Afwezigheidsmelding|Weer aanwezig/i.test(e.title || '')));
+    for (const m of stray?.values() || []) await m.delete().catch(() => {});
+  }
+  return res;
 }
 
 // ================= SOLLICITATIE STATUS =================

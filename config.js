@@ -55,9 +55,9 @@ module.exports = {
   inwonerRoleId: '1570595079347896360',
 
   // Actief-rol: gaat weg bij /afwezig en komt terug bij /aanwezig
-  actiefRoleId: '',  // TODO: ID van de Actief-rol (leeg = niet gebruiken)
+  actiefRoleId: '1570812679877034206',  // Actief-rol
   // Non-actief-rol: komt automatisch bij /afwezig en gaat weg bij /aanwezig
-  nonActiefRoleId: '',  // TODO: ID van de Non-actief-rol (leeg = niet gebruiken)
+  nonActiefRoleId: '1570812650462642349',  // Non-actief-rol
 
   // ===== GANG RANGEN (laagste -> hoogste) =====
   gangRoleId: '1567526057186435154', // GSF (basisrol voor alle leden)
@@ -101,8 +101,8 @@ module.exports = {
     promoties: '1570577092997812265',  // 🎖️︱promotie: /promo announcements
     demoties: '1570577143107166278',   // ⬇️︱demotie: /demote announcements (leeg = ook in het promotie-kanaal)
     warns: '1570577190532415660',      // ❌︱warn: elke /warn wordt hier ook geplaatst (leeg = niet)
-    afwezig: '1570577508951261254',    // 😴︱afwezig: /afwezig en /aanwezig meldingen
-    afwezigOverzicht: '1570577659552079892', // ❌︱non-actief: live overzicht van wie afwezig is (embed wordt automatisch bijgewerkt)
+    afwezig: '1570577508951261254',    // 😴︱afwezig (het overzicht staat hier; zie afwezigOverzicht)
+    afwezigOverzicht: '1570577508951261254', // 😴︱afwezig: 1 vast overzicht-embed van wie afwezig is (wordt automatisch bijgewerkt, geen losse embeds)
     ticketLogs: '1570578225589915840', // ✉️︱ticket-transcript (transcripts van gesloten tickets)
     blacklist: '1570574730216349796',  // 🚫︱blacklist (hier komt de blacklist-lijst, 1 embed die wordt bijgewerkt)
     gangregels: '',    // TODO: kanaal-ID voor de gang-regels (leeg = /gangregels plaatst ze in het kanaal waar je het typt)

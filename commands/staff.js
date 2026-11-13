@@ -241,9 +241,10 @@ commands.push({
     const tot = i.options.getString('tot');
     db.data.absences.push({ userId: i.user.id, reden, van, tot, date: Date.now() });
     db.setAbsent(i.user.id, { reden, van, tot, date: Date.now(), tag: i.user.username });
-    updateAfwezigPanel(client).catch((err) => console.error('Afwezig-overzicht bijwerken mislukt:', err.message)); // meteen, parallel aan de rest
-    const e = embed('🏖️ Afwezigheidsmelding', `**Wie:** ${i.user}\n**Reden:** ${reden}\n**Van:** ${van}\n**Tot:** ${tot}`, 0xf1c40f);
-    await announce(i, client, 'afwezig', e);
+    // Geen los embed meer in het kanaal: alleen het ene overzicht-embed wordt bijgewerkt
+    await i.deferReply({ flags: E });
+    const panelOk = await updateAfwezigPanel(client).then(() => true).catch((err) => { console.error('Afwezig-overzicht bijwerken mislukt:', err.message); return false; });
+    await i.editReply({ content: `🏖️ Je bent afwezig gemeld (**${van}** t/m **${tot}**).${panelOk && config.channels.afwezigOverzicht ? ` Het overzicht in <#${config.channels.afwezigOverzicht}> is bijgewerkt.` : ''}` });
     const roleOk = await setActief(i, false, 'Afwezig gemeld');
     if (!roleOk) i.followUp({ content: '⚠️ Je Actief/Non-actief-rol kon niet worden gewisseld (bot-rol staat niet boven die rollen, of de bot mist *Rollen beheren*). Laat dit door een beheerder regelen.', flags: E }).catch(() => {});
     logAction(client, i, '🏖️ Afwezig gemeld', `${i.user} meldt zich afwezig van **${van}** tot **${tot}**.\nReden: ${reden}`);
@@ -256,9 +257,10 @@ commands.push({
   data: new SlashCommandBuilder().setName('aanwezig').setDescription('Meld je weer aanwezig (Actief-rol terug, Non-actief weg)'),
   async execute(i, client) {
     if (!db.removeAbsent(i.user.id)) return deny(i, 'Je staat niet als afwezig gemeld.');
-    updateAfwezigPanel(client).catch((err) => console.error('Afwezig-overzicht bijwerken mislukt:', err.message)); // meteen, parallel aan de rest
-    const e = embed('✅ Weer aanwezig', `**Wie:** ${i.user}\nIs weer aanwezig en niet meer afwezig.`, 0x2ecc71);
-    await announce(i, client, 'afwezig', e);
+    // Geen los embed meer in het kanaal: alleen het ene overzicht-embed wordt bijgewerkt
+    await i.deferReply({ flags: E });
+    const panelOk = await updateAfwezigPanel(client).then(() => true).catch((err) => { console.error('Afwezig-overzicht bijwerken mislukt:', err.message); return false; });
+    await i.editReply({ content: `✅ Je bent weer aanwezig.${panelOk && config.channels.afwezigOverzicht ? ` Het overzicht in <#${config.channels.afwezigOverzicht}> is bijgewerkt.` : ''}` });
     const roleOk = await setActief(i, true, 'Weer aanwezig gemeld');
     if (!roleOk) i.followUp({ content: '⚠️ Je Actief/Non-actief-rol kon niet worden gewisseld (bot-rol staat niet boven die rollen, of de bot mist *Rollen beheren*). Laat dit door een beheerder regelen.', flags: E }).catch(() => {});
     logAction(client, i, '✅ Weer aanwezig', `${i.user} is weer aanwezig.`);
